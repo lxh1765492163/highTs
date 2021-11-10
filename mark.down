@@ -1,0 +1,35 @@
+#环境依赖讲解
+
+## ts-node
+node直接运行ts代码
+省略了tsc编译为js这个步骤
+
+ts-node xxx.ts 直接运行改文件
+
+## nodemon
+重启基于nodejs的应用程序
+
+例如
+每次文件修改了都需要ts-node xx.ts 才能看到最新的修改， nodemon 在文件变化后自动运行了ts-node xxx.ts， 那样就能看到最新的变化
+
+## nodemon --watch src/ -e ts --exec ts-node src/index.ts
+--watch src/ -e ts 
+监听文件是ts结尾的（--watch src/ -e ts 还可以写成--watch src/**/*.ts）
+
+--exec ts-node src/index.ts
+检测到src目录下任何文件有变动就执行src/index.ts文件
+
+
+
+## parcel-bundler
+打包工具
+
+
+
+#运行问题
+## 不同文件中如果使用了相同变量会有报红提示
+原因：
+ts好像在全局查找到了这个变量， 文件添加export { } 会告诉ts 仅在当前文件寻找。（原理未知 ， 同时有没有什么配置项解决？？？）
+
+解决方案
+文件添加 export { }解决
